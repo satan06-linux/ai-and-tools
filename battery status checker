@@ -1,0 +1,31 @@
+import psutil
+import time
+
+
+def battery_status_checker():
+    battery = psutil.sensors_battery()
+    
+    if battery is None:
+        print("No battery information available.")
+        return
+
+    percent = battery.percent
+    is_plugged = battery.power_plugged
+    time_left = battery.secsleft
+
+    print(f"Battery Percentage: {percent}%")
+    print("Charging Status: ", "Plugged In" if is_plugged else "Not Plugged In")
+
+    if time_left == psutil.POWER_TIME_UNLIMITED:
+        print("Battery status: Charging (time left: unlimited)")
+    elif time_left == psutil.POWER_TIME_UNKNOWN:
+        print("Battery status: Unable to determine time left")
+    else:
+        hours, seconds = divmod(time_left, 3600)
+        minutes, seconds = divmod(seconds, 60)
+        print(f"Time Left: {hours} hours and {minutes} minutes")
+
+if __name__ == "__main__":
+    print("Battery status checker:")
+    battery_status_checker()
+pped.")
