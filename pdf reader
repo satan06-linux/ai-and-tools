@@ -1,0 +1,24 @@
+import PyPDF2
+import os
+
+def reader(filename, read_from_which_page_number=0, startfile=True):
+
+    if startfile == True:
+        os.startfile(filename)
+
+        book = open(filename, "rb")
+
+        pdf_reader = PyPDF2.pdfFileReader(book)
+
+        pages = pdf_reader.getNumPages()
+        print("number of pages = ", pages)
+
+        page = pdf_reader.getPage(read_from_which_page_number)
+
+        text = page.extract_text()
+
+        book.close()
+
+        return text()
+    
+reader()
