@@ -1,0 +1,46 @@
+import speech_recognition as sr
+
+def takeCommand():
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+         print("Listening...")
+         r.pause_threshold = 1
+         audio = r.listen(source)
+    
+morse_map = {
+    ".-": "A",      "-...": "B",    "-.-.": "C",    "-..": "D",     ".": "E",
+    "..-.": "F",    "--.": "G",     "....": "H",    "..": "I",      ".---": "J",
+    "-.-": "K",     ".-..": "L",    "--": "M",      "-.": "N",      "---": "O",
+    ".--.": "P",    "--.-": "Q",    ".-.": "R",     "...": "S",     "-": "T",
+    "..-": "U",     "...-": "V",    ".--": "W",     "-..-": "X",    "-.--": "Y",
+    "--..": "Z",    ".----": "1",   "..---": "2",   "...--": "3",   "....-": "4",
+    ".....": "5",   "-....": "6",   "--...": "7",   "---..": "8",   "----.": "9",
+    "-----": "0"
+}
+
+def get_morse_key(target) :
+    for key, value in morse_map.items():
+        if value == target :
+            return key
+
+############## for testing print(get_morse_key('A')) #################
+
+def morse_encode(text):
+    text = text.strip().upper()
+    words = text.split(' ')
+    encoded_text = ''
+
+    for word in words:
+        for char in word:
+            encoded_text += get_morse_key(char) + ' '
+        encoded_text += '  '
+
+    return encoded_text
+#########################3 for example print("rakshith") ############################
+
+text = takeCommand()
+morse_code = morse_encode(text)
+
+
+print('Speech to text: ', text)
+print('Morse code: ', morse_code)
