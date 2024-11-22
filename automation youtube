@@ -1,0 +1,79 @@
+import pyautogui
+import webbrowser
+
+def webAuto(command):
+    query = str(command)
+    if "open" in query :
+        elif "youtube" in query :
+            webbrowser.open("https://www.youtube.com")
+
+
+def youtubeAuto(command):
+
+
+    query = str(command)
+    
+    
+    if "pause" in query :
+        pyautogui.press('space')
+        
+    elif "resume" in query:
+        pyautogui.press("space")
+
+    elif "rewind" in query: 
+        pyautogui.press('j')
+
+    elif "fastforwad" in query :
+        pyautogui.press('l')
+
+    elif "previous video" in query :
+        pyautogui.hotkey('shift', 'p')
+
+    elif "next video" in query :
+        pyautogui.hotkey('SHIFT', 'n')
+
+    elif "decrease playback speed" in query :
+        pyautogui.hotkey('SHIFT', ',')
+
+    elif "increase playback speed" in query :
+        pyautogui.hotkey('SHIFT', '.')
+
+    elif "full screen" in query :
+        pyautogui.press('f')
+
+    elif "mini player" in query :
+        pyautogui.press('i')
+
+    elif "theater mode" in query :
+        pyautogui.press('t')
+
+    elif"close miniplayer" in query:
+        pyautogui.press('ESCAPE')
+
+    elif "mute" in query :
+        pyautogui.press('m')
+
+    elif "unmute" in query :
+        pyautogui.press('m')
+
+    elif "increase volume" in query:
+        pyautogui.hotkey('up arrow')
+
+    elif "decrease volume" in query :
+        pyautogui.hotkey('down arrow')
+
+    elif "subtitles" in query or "captions" in query:
+        pyautogui.press('c')
+
+    elif "text brightness" in query :
+        pyautogui.press('o')
+
+    elif "zoom in" in query :
+        pyautogui.hotkey('+')
+
+    elif "zoom out" in query:
+        pyautogui.hotkey('-')
+
+    elif "captions background" in query:
+        pyautogui.press('w')
+
