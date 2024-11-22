@@ -1,0 +1,83 @@
+import tkinter as tk
+import speech_recognition as sr
+import pyttsx3
+import pywhatkit 
+import datetime
+
+class JarvisAssistant:
+    def __init__(self, master):
+        self.master = master
+        master.title("Jarvis Assistant - WhatsApp Bot")
+        master.geometry("500x500")
+        master.configure(bg='black')
+
+        self.label = tk.Label(master, text="Welcome to Jarvis Assistant!", fg="white", bg='black', font=("Helvetica", 16))
+        self.label.pack(pady=10)
+
+        self.text_area = tk.Text(master, height=10, width=50, bg='black', fg='white')
+        self.text_area.pack(pady=10)
+
+        self.speak_button = tk.Button(master, text="Speak", command=self.listen, bg='blue', fg='white')
+        self.speak_button.pack(pady=5)
+
+        self.quit_button = tk.Button(master, text="Quit", command=master.quit, bg='red', fg='white')
+        self.quit_button.pack(pady=5)
+
+        self.engine = pyttsx3.init()
+
+    def listen(self):
+        recognizer = sr.Recognizer()
+        with sr.Microphone() as source:
+            self.text_area.insert(tk.END, "Listening...\n")
+            self.master.update()  # Update the GUI
+            audio = recognizer.listen(source)
+
+            try:
+                command = recognizer.recognize_google(audio)
+                self.text_area.insert(tk.END, f"You said: {command}\n")
+                self.respond(command)
+            except sr.UnknownValueError:
+                self.text_area.insert(tk.END, "Sorry, I did not understand that.\n")
+            except sr.RequestError:
+                self.text_area.insert(tk.END, "Could not request results from Google Speech Recognition service.\n")
+
+    def respond(self, command):
+        command = command.lower()
+
+        if "send message" in command:
+            self.send_whatsapp_message(command)
+        else:
+            response = "I'm not sure how to respond to that."
+            self.text_area.insert(tk.END, f"Jarvis: {response}\n")
+            self.engine.say(response)
+            self.engine.runAndWait()
+
+    def send_whatsapp_message(self, command):
+        try:
+            # Extracting the phone number and message from the command
+            parts = command.split("to")
+            if len(parts) == 2:
+                recipient = parts[1].strip()
+                message = parts[0].replace("send message", "").strip()
+                
+                # Get current time to schedule the message
+                now = datetime.datetime.now()
+                hour = now.hour
+                minute = now.minute + 2  # Schedule it to send after 2 minutes
+
+                # Send the message
+                pywhatkit.sendwhatmsg(recipient, message, hour, minute)
+                response = f"Message sent to {recipient}."
+            else:
+                response = "Please specify the recipient and the message."
+        except Exception as e:
+            response = f"An error occurred: {str(e)}"
+
+        self.text_area.insert(tk.END, f"Jarvis: {response}\n")
+        self.engine.say(response)
+        self.engine.runAndWait()
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    jarvis = JarvisAssistant(root)
+    root.mainloop()
