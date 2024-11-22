@@ -1,0 +1,44 @@
+import speech_recognition as sr
+import tkinter as tk
+from nltk.tokenize import word_tokenize
+
+root = tk.Tk()
+root.title("Voice Controlled Text Selector")
+text_area = tk.Text(root, width=70, height=9)
+text_area.pack()
+
+def takeCommand():
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+         print("Listening...")
+         r.pause_threshold = 1
+         audio = r.listen(source)
+
+    try:
+        print("Recognizing....")
+        query = r.recognize_google(audio, language = 'en-in')
+        print(f"user said: {query}\n")
+    
+    except Exception as e:
+        print(e)
+        print("Try to say again")
+        return "None"
+    return query
+
+def process_command(command):
+    tokens = word_tokenize(command)
+    if "select" in tokens and "text" in tokens:
+        select_text(text_area)
+    else:
+        print("Command not recognized.")
+
+def select_text(text_area):
+    text_area.tag_add("selected", "1.0", "end")
+    text_area.tag_config("selected", background="blue", foreground="white")
+
+    button = tk.Button(root, text="Start Listening", command=takeCommand)
+    button.pack()
+
+    root.mainloop()
+
+    
