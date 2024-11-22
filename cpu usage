@@ -1,0 +1,30 @@
+import time 
+import pyttsx3
+
+engine = pyttsx3.init('sapi5')
+voices = engine.getProperty('voices')
+engine.setProperty('voice', voices[0].id)
+
+def speak(audio):
+    print(audio)
+    engine.say(audio)
+    engine.runAndWait()
+
+def cpu_usage_checker(interval=1):
+    while True:
+        # Get the CPU usage percentage
+        cpu_percent = psutil.cpu_percent(interval=interval)
+        speak(f"CPU Usage: {cpu_percent}%")
+        time.sleep(interval)
+
+
+if __name__ == "__main__":
+
+    speak("Starting CPU usage checker. Press Ctrl+C to stop.")
+
+    try:
+        cpu_usage_checker()
+    
+    except KeyboardInterrupt:
+        speak("CPU usage checker stopped.")
+
