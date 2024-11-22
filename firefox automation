@@ -1,0 +1,209 @@
+import pyautogui
+
+def firefoxAuto(command) :
+    query = str(command) 
+
+    if "back" in query :
+        pyautogui.press('Backspace')
+
+    elif "forward" in query :
+        pyautogui.hotkey('Shift', 'Backspace')
+
+    elif "Open file" in query:
+        pyautogui.hotkey('ctrl', 'o')
+
+    elif "reload" in query:
+        pyautogui.hotkey('Ctrl+R')
+    
+    elif "stop" in query:
+        pyautogui.press('Esc')
+    
+    elif "scroll down" in query:
+        pyautogui.pyautogui.press('Space bar')
+
+    elif "scroll up" in query :
+        pyautogui.hotkey('Shift', 'Space bar')
+
+    elif "next Frame" in query:
+        pyautogui.pyautogui.press('F6')
+
+    elif "previous Frame" in query:
+        pyautogui.hotkey('Shift', 'F6')
+    
+    elif "print" in query :
+        pyautogui.hotkey('ctrl', 'p')
+
+    elif "save focused link" in query :
+        pyautogui.hotkey('Alt', 'Enter')
+
+    elif "save page as" in query :
+        pyautogui.hotkey('Ctrl', 'S') 
+
+    elif "Zoom in " in query :
+        pyautogui.hotkey('Ctrl', '+')
+
+    elif "zoom out" in query :
+        pyautogui.hotkey('Ctrl', '-')
+
+    elif "zoom reset" in query :
+        pyautogui.hotkey('Ctrl', '0')
+
+    elif "copy" in query :
+        pyautogui.hotkey('Ctrl', 'C')
+
+    elif "paste" in query :
+        pyautogui.hotkey('Ctrl', 'V')
+
+    elif "Delete" in query :
+        pyautogui.pyautogui.press('Delete')
+
+    elif "Redo" in query:
+        pyautogui.hotkey('Ctrl', 'Y')
+
+    elif "undo" in query :
+        pyautogui.hotkey('Ctrl', 'Z')
+    
+    elif "selesct all" in query :
+        pyautogui.hotkey('Ctrl', 'A')
+
+    elif "find in the page" in query :
+        pyautogui.hotkey('Ctrl', 'F')
+
+    elif "Find again" in query :
+        pyautogui.hotkey('Ctrl', 'G')
+
+    elif "find the previous" in query :
+        pyautogui.hotkey('Ctrl', 'Shift', 'G')
+
+    elif " quick find" in query:
+        pyautogui.press('/')
+
+    elif "Quick Find Bar" in query :
+        pyautogui.press('ESC') 
+
+    elif " Default search engine" in query :
+        pyautogui.hotkey('Ctrl', 'K')
+
+    elif "manage search engine" in query :
+        pyautogui.press('F4')
+
+    elif " close tab" in query :
+        pyautogui.hotkey('Ctrl', 'W')
+    
+    elif "close windows" in query :
+        pyautogui.hotkey('Ctrl', 'Shift', 'W')
+
+    elif " tabs recently in order" in query :
+        pyautogui.hotkey('Ctrl', 'Tab')
+
+    elif "exit" in query :
+        pyautogui.hotkey('Ctrl', 'Alt', 'Q')
+
+    elif "go one tab to left" in query:
+        pyautogui.hotkey('Ctrl', 'Shift', 'Tab')
+
+    elif "move tab to start" in query :
+        pyautogui.press('Alt', 'D') 
+
+    elif "move tab to start " in query :
+        pyautogui.hotkey('Crtl', 'Shift', 'End')
+
+    elif "mute" in query or "unmute" in query :
+        pyautogui.hotkey('Ctrl', 'M')
+
+    elif " new tab" in query :
+        pyautogui.hotkey('Ctrl', 'T')
+
+    elif "New window" in query :
+        pyautogui.hotkey('Ctrl', 'N')
+
+    elif "private window" in query :
+        pyautogui.hotkey('Ctrl', 'Shift', 'P')
+
+    elif "Search in new background Tab" in query :
+        pyautogui.hotkey('Alt', 'Shift', 'Enter')
+
+    elif "search in new foreground tab" in query :
+        pyautogui.hotkey('Alt', 'Enter')
+
+    elif "search in new windows" in query :
+        pyautogui.hotkey('Shift', 'Enter')
+
+    elif "open search in new background tab" in query :
+        pyautogui.hotkey('Ctrl', 'Enter')
+
+    elif " reopen the last closed tab" in query :
+        pyautogui.hotkey('Ctrl', 'Shift', 'T')
+
+    elif "reopen the last closed windows" in query :
+        pyautogui.hotkey('Ctrl', 'Shift', 'N')
+
+
+####################### HISTORY COMMANDS #######################
+
+    elif "history side bar" in query : 
+        pyautogui.hotkey('Ctrl', 'H')
+
+    elif "Library window" in query :
+        pyautogui.hotkey('Ctrl', 'Shift', 'H')
+
+    elif " clear recent history" in query :
+        pyautogui.hotkey('Ctrl', 'Shift', 'Del')
+
+    elif " Bookmark all tabs" in query :
+        pyautogui.hotkey('Ctrl', 'Shift', 'D')
+
+    elif "bookmark this page" in query :
+        pyautogui.hotkey('Ctrl', 'D')
+
+    elif "bookmark side bar " in query :
+        pyautogui.hotkey('Ctrl', 'B')
+
+    elif "show bookmark toolbar" in query or "hide bookmark toolbar" in query:
+        pyautogui.hotkey('Ctrl', 'Shift', 'B')
+
+
+#################### tools ##########################
+    
+    elif "Downloads" in query :
+        pyautogui.hotkey('Ctrl', 'J')
+
+    elif "web console" in query :
+        pyautogui.hotkey('Ctrl', 'Shift', 'K')
+
+    elif " inspector" in query :
+        pyautogui.hotkey('Ctrl', 'Shift', 'C')
+
+
+    elif "style editor" in query :
+        pyautogui.hotkey('Shift', 'F7')
+
+    elif "profiler" in query :
+        pyautogui.hotkey('Shift', 'F5')
+
+    elif "network" in query :
+        pyautogui.hotkey('Ctrl', 'Shift', 'E')
+
+    elif "page source" in query :
+        pyautogui.hotkey('Ctrl', 'U')
+
+    elif "browser console" in query :
+        pyautogui.hotkey('Ctrl', 'Shift', 'J')
+
+    elif "page info" in query :
+        pyautogui.hotkey('Ctrl', 'I')
+
+    elif "rotate the document to clock wise" in query :
+        pyautogui.hotkey('R')
+
+    elif " rotate counter clockwise" in query :
+        pyautogui.hotkey('Shift', 'R')
+
+    elif "switch to presentation mode " in query:
+        pyautogui.hotkey*('Ctrl', 'Alt', 'P') 
+
+    elif "text selection tool" in query :
+        pyautogui.hotkey('S')
+    
+    elif "save"in query or "save as" in query:
+    	pyautogui.hotkey('Ctrl', 's')
