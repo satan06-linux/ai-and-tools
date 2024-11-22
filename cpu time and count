@@ -1,0 +1,53 @@
+import psutil
+import time
+
+
+############################### cpu timer #################################
+def cpu_time_checker(interval=5):
+    process = psutil.Process()
+    while True:
+        # Get the CPU time of the current process
+        cpu_time_process = process.cpu_times()
+        
+        # Get the CPU time of the system
+        cpu_time_system = psutil.cpu_times()
+        
+        print(f"--- CPU Time ---")
+        print(f"Process CPU Time: user={cpu_time_process.user:.2f} sec, system={cpu_time_process.system:.2f} sec")
+        print(f"System CPU Time: user={cpu_time_system.user:.2f} sec, system={cpu_time_system.system:.2f} sec")
+        print(f"System Idle Time: {cpu_time_system.idle:.2f} sec")
+        print("------------------")
+        
+        time.sleep(interval)  # Wait for the specified interval before checking again
+
+if __name__ == "__main__":
+    print("Starting CPU time checker. Press Ctrl+C to stop.")
+    try:
+        cpu_time_checker(interval=5)  # Check every 5 seconds
+    except KeyboardInterrupt:
+        print("\nCPU time checker stopped.")
+
+
+####################################### cpu count ######################################
+
+def cpu_count_checker(interval=5):
+    while True:
+        # Get the logical CPU count
+        logical_cpus = psutil.cpu_count(logical=True)
+        
+        # Get the physical CPU count
+        physical_cpus = psutil.cpu_count(logical=False)
+        
+        print(f"--- CPU Count ---")
+        print(f"Logical CPU Count: {logical_cpus}")
+        print(f"Physical CPU Count: {physical_cpus}")
+        print("------------------")
+        
+        time.sleep(interval)  # Wait for the specified interval before checking again
+
+if __name__ == "__main__":
+    print("Starting CPU count checker. Press Ctrl+C to stop.")
+    try:
+        cpu_count_checker(interval=5)  # Check every 5 seconds
+    except KeyboardInterrupt:
+        print("\nCPU count checker stopped.")
