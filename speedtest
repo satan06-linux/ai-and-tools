@@ -1,0 +1,34 @@
+import speedtest
+import threading
+
+def download_speed(speed, value_download):
+    download = speed.download()
+
+    download = int(download/8000000)
+    print("Downloading speed = ", download, "mbps")
+
+def upload_speed(speed, value_upload):
+    upload = speed.upload()
+
+    upload = int(upload/8000000)
+    print("Uploading speed = ", upload, "mbps")
+
+def Speedtest():
+    print("Checking...")
+
+    speed = speedtest.Speedtest()
+
+    value_download = [0]
+    value_upload = [0]
+
+    download_thread = threading.Thread(target=download_speed, args=(speed, value_download))
+    upload_thread = threading.Thread(target=upload_speed, args=(speed, value_upload))
+
+    download_thread.start()
+    upload_thread.start()
+
+    download_thread.join()
+    upload_thread.join()
+    return value_download[0], value_upload[0]
+
+Speedtest()
