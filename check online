@@ -1,0 +1,15 @@
+import requests
+
+def status_online(url="https://www.google.com", timeout=5):
+    try:
+        response = requests.get(url, timeout=timeout)
+        return response.status_code >= 200 and response.status_code <400
+    except (requests.ConnectionError, requests.Timeout):
+        return False
+def check_internet_status():
+    if status_online():
+        print("System is online")
+
+    else:
+        print("system is offline")
+
