@@ -1,0 +1,212 @@
+from keyboard import press
+from keyboard import press_and_release
+import speak
+import takeCommand
+
+
+def NotePadAuto(command) :
+
+
+    query = str(command) 
+
+
+    if "open previously saved note" in query:
+        press_and_release('Ctrl + O')
+        
+    elif "save"in query or "save as" in query:
+        press_and_release('Ctrl + S')
+        
+    elif "print" in query :
+        press_and_release('Ctrl + P')
+        
+    elif "new" in query or "open a blank page" in query :
+        press_and_release('Ctrl + N')
+        
+    elif "undo" in query:
+        press_and_release('Ctrl + Z')
+        
+    elif "Redo" in query:
+        press_and_release('Ctrl + Y')
+        
+    elif "Cut" in query:
+        press_and_release('Ctrl + X')
+        
+    elif "copy" in query:
+        press_and_release('Ctrl + C')
+        
+    elif "paste" in query:
+        press_and_release('Ctrl + P')
+        
+    elif "find" in query or "search in the page " in query :
+        press_and_release('Ctrl + F')
+        
+    elif "Replace" in query or"change the word" in query:
+        press_and_release('Ctrl + H')
+        
+    elif "Select all" in query:
+        press_and_release('Ctrl + A')
+        
+    elif "Insert dateandtime" in query:
+        press_and_release('F5')
+
+    elif "go to right" in query or "go to beginning of next line break"in query:
+        press('Right Arrow')
+
+    elif "go to left" in query or "go to previous line break" in query:
+        press('Left Arrow')
+
+    elif "go up" in query or "go up one row" in query:
+        press('Up Arrow')
+
+    elif "go down" in query or "go down one row" in query:
+        press('Down Arrow')
+
+    elif "go to current line of the beginning" in query :
+        press('HOME')
+
+    elif "go to the end of the document" in query or "end of the document" in query:
+        press_and_release('CTRL + END')
+
+    elif "move up one frame" in query or "move up the frame" in query:
+        press('PG UP')
+
+    elif "move down one frame" in query or "move down the frame" in query:
+        press('PG DN')
+
+    elif "selct character to left" in query:
+        press_and_release('SHIFT + LEFT ARROW')
+
+    elif "select character to right" in query:
+        press_and_release('SHIFT + RIGHT ARROW')
+
+    elif "select line upward" in query :
+        press_and_release('SHIFT + UP ARROW') 
+    
+    elif "select line downwards" in query:
+        press_and_release('SHIFT + DOWN ARROW')
+
+    elif "select text between the cursor and the beginning of current line" in query or "select text between the beginning and current line" in query :
+        press_and_release('SHIFT + HOME') 
+
+    elif "select select text between the cursor and the end of the current line" in query or "select the text between the end and current line" in query :
+        press_and_release('SHIFT + END')
+
+    elif "Select text between the cursor and the beginning of the document" in query or "select text from the beginning of the document" in query :
+        press_and_release('SHIFT + CTRL + HOME') 
+
+    elif "find text" in query or "search a word" in query or "find a word" in query:
+        press_and_release('CTRL + F')
+
+    elif "Make selected text bold" in query or "make the text into bold" in query:
+        press_and_release('CTRL + B')
+
+    elif "under line selected text" in query:
+        press_and_release('CTRL + U') 
+
+    elif "make selected text superscript" in query:
+        press_and_release('CTRL + SHIFT + =')
+
+    elif "make selected text subscript" in query:
+        press_and_release('CTRL + =')
+
+    elif "delete characters to left" in query or "backspace" in query:
+        press_and_release('BACKSPACE')
+
+    
+        
+def windowsAuto(command):
+
+
+    query = str(command)
+    
+    if "start menu" in query or "opan menu" in query :
+        press('Windows')
+        
+    elif "open action center" in query:
+        press_and_release('Windows + A')
+        
+    elif "open search" in query:
+        press_and_release('Windows + S')
+        
+    elif "open display" in query or "hide display" in query :
+        press_and_release('Windows + D')
+        
+    elif "lock the computer" in query or "lock the home screen" in query or "lock" in query:
+        press_and_release('Windows + L')
+    
+    elif "minimize the windows" in query:
+        press_and_release('Windows + M')
+        
+    elif "set a focus " in query:
+        press_and_release('Windows + B')
+        
+    elif "launch cortana" in query or "start cortana" in query or "activate cortana" in query:
+        press_and_release('Windows + C')
+        
+    elif "launch game bar" in query or "start game bar" in query :
+        press_and_release('Windows + G')
+        
+    elif "lock orientation" in query or "orientation lock" in query :
+        press_and_release('Windows + O')
+        
+    elif "dictation filter" in query or "open dictation filter " in query :
+        press_and_release('Windows + H')
+        
+    elif "cycle through notification" in query:
+        press_and_release('Windows + V')
+        
+    elif "open settings" in query or "settings" in query:
+        press_and_release('Windows + I')
+        
+    elif "connect to wireless device" in query:
+        press_and_release('Windows + K')
+        
+    elif "connect to projector" in query:
+        press_and_release('Windows + P')
+        
+    elif "display run dialogue" in query or "open run program" in query:
+        press_and_release('Windows + R')
+        S = takeCommand().lower()
+        speak("what would you like to open sir search_query={S}")
+        
+    elif "launch the ease of access center" in query or "launch access center" in query or "open access center" in query:
+        press_and_release('Windows + U')
+        
+    elif "narrator" in query :
+        press_and_release('Windows + ENTER')
+    
+    elif "open task view" in query :
+        press_and_release('Windows + TAB')
+        
+    elif " switch language" in query or "switch keyboard layout" in query:
+        press_and_release('Windows + SPACE BAR') 
+        
+    elif "screenshot of window" in query:
+        press_and_release('Alt + PrtScr')
+
+    elif "Display a list of previously typed addresses" in query or "Display a list of previously typed" in query:
+        press_and_release('F4')
+        
+       
+      elif "start recording" in query or "make a recording" in query:
+      	press_and_release('CTRL + SHIFT +R')
+      	
+      elif "exit debug mode" in query:
+      	press('F10')
+      	
+      elif "go to next pane" in query or "open new pane" in query:
+      	press('F6')
+      
+     elif "open previous pane" in query or "previous pane" in query:
+     	press_and_release('SHIFT + F6')
+     	
+     elif "go to color contrast analyzer" in query or "check the color analyzer" in query :
+     	press_and_release('CTRL + R ')
+     	
+     elif "help" in query:
+     	press('F1')
+     	
+     elif "pause updates" in query or "resume updates" in query:
+     	press_and_release('CTRL + SHIFT + F5') 
+     	
+
