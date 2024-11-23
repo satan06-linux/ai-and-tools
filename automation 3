@@ -1,0 +1,313 @@
+from keyboard import press
+from keyboard import press_and_release
+from setuptools import Command
+
+engine = pyttsx3.init('sapi5')
+voices = engine.getProperty('voices')
+engine.setProperty('voice', voices[0].id)
+
+def speak(audio):
+    print(audio)
+    engine.say(audio)
+    engine.runAndWait()
+
+def takeCommand():
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+         print("Listening...")
+         r.pause_threshold = 1
+         audio = r.listen(source)
+
+    try:
+        print("Recognizing....")
+        query = r.recognize_google(audio, language = 'en-in')
+        print(f"user said: {query}\n")
+    
+    except Exception as e:
+        print(e)
+        speak("Try to say again")
+        return "None"
+    return query
+
+if __name__ == '__main__':
+    while True:
+        query  = takeCommand().lower()
+
+def visualstudioauto(takeCommand) :
+
+    query = str(Command) 
+     
+     
+    if"show coammand palette" in query or "open command palette" in query: 
+     press_and_release('CTRL + SHIFT + P') 
+     speak("opening command palette") 
+
+
+    elif "close windows" in query or "instance" in query:
+       press_and_release('CTRL + SHIFT + W') 
+       speak("closing visual studio windows")
+
+    elif "open new window" in query or "new window" in query:
+       press_and_release('CTRL + SHIFT + N')
+       speak("opening new windows in vs code") 
+
+    elif "user settings" in query :
+       press_and_release('CTRL + ,') 
+       speak("opening user settings") 
+    
+########################### line editing tools ##########################################
+
+    elif " delete the line" in query or "delete the slected line" in query:
+       press_and_release('CTRL + SHIFT + K')
+       speak("deleting the line") 
+
+    elif "copy the line" in query:
+       press_and_release('CTRL + C') 
+       speak("copying the line") 
+
+    elif "cut the line" in query :
+       press_and_release('CTRL + X') 
+       speak("the line has been cutted") 
+
+    elif "insert line below" in query:
+       press_and_release('CTRL + ENTER')
+       speak("inserting the line") 
+
+    elif "insert line above" in query:
+       press_and_release('CTRL + SHIFT + ENTER')
+
+    elif "jump to matching bracket" in query or "go to same bracket" in query:
+       press_and_release('CTRL + SHIFT + /') 
+       speak("would like to go for same bracket") 
+
+       if "yes" in query:
+          speak("found the same bracket") 
+
+       else :
+          speak("not found matching bracket") 
+
+    elif "go to begining of the file" in query:
+       press_and_release('CTRL + HOME') 
+       speak("going to the beginning file line") 
+
+    elif " fold region" in query:
+       press_and_release('CTRL + SHIFT [') 
+       speak (" opening folding region") 
+
+    elif "fold all subregion" in query:
+       press_and_release('CTRL + K + CTRL + [')
+
+    elif "unfold region" in query:
+       press_and_release('CTRL + K + CTRL + ]') 
+       speak (" unfolding all the region") 
+
+########################### navigation control ###############################
+
+    elif "show all the symbols" in query or "show symbols" in query or "symbol" in query:
+      press_and_release('CTRL+T')
+      gf = "displaying symbols", "opening symbols", "showing all the symbols", "showing symbols of vs code"
+      speak(random.choice(gf))
+
+    elif "go to file" in query:
+      press_and_release('CTRL+P')
+
+
+    elif "show problem panel" in query or "open problem panel" in query or "problem panel" in query:
+      press_and_release('Ctrl+Shift+M')
+      speak("opening problem panel") 
+
+    elif "go to next error" in query or "shown next error" in query:
+      press('F8') 
+      speak("showing next error") 
+
+    elif "go to next error" in query or "show next error" in query:
+      press_and_release('SHIFT+F8')
+      speak(" okay sir, showing next error") 
+
+    elif "navigate to editor history" in query or "show editor history" in query :
+      press_and_release('CTRL+SHIFT+TAB') 
+      speak("opening editor history pls wait...")
+
+################################### serch, findand replace ###########################################
+
+    elif "Find match" in query or "find match for slected word" in query:
+       press_and_release('ALT+ENTER')
+       speak("finding the word ...\n") 
+       speak("found the match")
+
+    elif "add slection for the next match" in query or "find the next match" in  query:
+       press_and_release('CTRL+D')
+       speak("finding the next match of the word")
+
+
+    elif " show me the toggle case-sensitive" in query or "open the toggle case-sensitive" in query or "activate toggle case-sensitive" in query:
+       press_and_release('ALT+C') 
+       speak("okay sir! opening toggle case-sensitive")
+
+    elif "open regex" in query or "activate regex" in query:
+       press_and_release('ALT+R') 
+       speak("activating regex") 
+
+    elif "open whole word" in query:
+       press_and_release('ALT+W')
+       speak("opening whole word")
+
+    elif "insert cursor" in query:
+       press_and_release('ALT+CLICK') 
+
+
+    elif"undo the last cursor operation" in query:
+       press_and_release('CTRL+U')
+       speak("okay sir! undoing the last cursor operations") 
+
+    elif "select current line" in query or "slect the line" in query:
+       press_and_release('CTRL+L')
+       speak("the line has been selected now\n")
+       speak("would like to copy or cut the selected line")
+
+       if"cut" in query:
+          press_and_release('CTRL+X')
+
+       if "copy" in query:
+          press_and_release('CTRL+C') 
+
+
+    elif "auto fix" in query or "fix it" in query:
+       press_and_release('SHIFT+ALT+.')
+       speak("fix the line code sir !") 
+
+    elif " symbol highlights" in query :
+       press_and_release('F7') 
+
+    elif " go to previous change " in  query:
+       press_and_release('SHIFT+ALT+F5') 
+
+    elif "change all occurence" in query or " change the occurence" in query :
+       press_and_release('CTRL+F2') 
+       speak("changing the occurence") 
+
+    elif "`start voice chat" in query or "enable voice chat" in query or "voice chat" in query:
+       press_and_release('CTRL+l') 
+
+    elif "stop voice chat" in query or "disable voice chat" in query or "stop  voic4e chat" in query:
+       press('ESCAPE') 
+       speak("stopping voice chat") 
+
+    elif "save file" in query:
+       press_and_release('CTRL+S') 
+       speak("saving the file ...") 
+
+    elif "save the file as" in query:
+       press_and_release('CTRL+SHIFT+S')
+       write = takeCommand().lower() 
+       speak("saving the file as {write}") 
+
+    elif "reveal the file in file explorer" in query:
+       press_and_release('SHIFT+ALT+R') 
+       speak("revealing the file pls wait ...") 
+
+    elif "open the file" in query:
+       press_and_release('CTRL+O') 
+
+    elif "open the recent file" in query:
+       press_and_release('CTRL+R') 
+       speak("opening recent file") 
+
+    elif "compare active file with saved file" in query or "compare the file" in query:
+       press_and_release("CTRL+K D")
+       speak("comparing the file") 
+
+    elif "copy path of then file" in query:
+       press_and_release('SHIFT+ALT+C') 
+       speak("copying the path of the file ....") 
+
+    elif "compare active file with clipboard" in query:
+       press_and_release('CTRL+K C') 
+
+    elif "open editors view" in query:
+       press_and_release('CTRL+K E')
+       speak("opening editors view .........") 
+
+    elif "expand abbrevation" in query:
+       press('TAB')
+       speak("expanding the abbrevations") 
+
+    elif " detect language" in query or "detect language from the text" in query :
+       press_and_release('SHIFT+ALT+D') 
+       speak("DETECTING Language") 
+
+    elif "format document" in query:
+       press_and_release('SHIFT+ALT+F') 
+       speak("open format cell") 
+
+    elif "revert selcted changes" in query :
+       press_and_release('CTRL+R CTRL+K')
+
+    elif "go to bottom hover" in query :
+       press_and_release('END') 
+       speak("going to bottom of the line") 
+
+    elif"go to definition" in query:
+       press_and_release('CTRL+F12') 
+       
+    
+    elif "new window" in query:
+       press_and_release('CTRL+SHIFT+N')
+       speak("creating new windows") 
+
+    elif "change cell to code" in query:
+       press_and_release('Y')
+       speak("changing cell to code") 
+
+    elif "close windows" in query:
+       press_and_release('CTRL+SHIFT+W') 
+       speak("closing windows . . . .") 
+
+    elif" accept input" in query:
+       press_and_release('ENTER') 
+       speak("accepting input ...")
+
+    elif "continue debug" in query:
+       press('F5')
+
+    if "stop debugging" in query:
+      press_and_release('SHIFT+F5') 
+      speak("stopping debugging ...") 
+
+    elif "inline breakpoint" in query:
+       press_and_release('SHIFT+F9') 
+
+    elif" restart debugging" in query:
+       press_and_release('CTRL+SHIFT+F5') 
+       speak("restarting debugging...")
+
+################################ display ######################################3
+
+    elif "zoom in" in query:
+       press_and_release('CTRL+=') 
+       speak("zooming in")
+
+    elif "zoom out" in query:
+       press_and_release('CTRL+-') 
+       speak("zooming out")
+
+    elif "shrink selection" in query:
+       press_and_release('SHIFTALT+← ') 
+
+    elif " expand selection" in query:
+       press_and_release('Shift+Alt+→') 
+       speak("expanding selection") 
+
+    elif " trigger suggestion" in query:
+       press_and_release('Ctrl+Space, Ctrl+I ') 
+
+    elif "trigger parameter hints" in query:
+       press_and_release('CTRL+SHIFT+SPACE') 
+       speak("trigggering parameter hints") 
+
+    elif "go to definition" in query:
+       press_and_release('F12')
+
+    elif "show output panel" in query or "output panel" in query or "output" in query or "what is the output" in query  or "jarvis what is the output" in query :
+      press_and_release('CTRL+SHIFT+U') 
+      speak("showing output ..")
