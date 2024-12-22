@@ -1,0 +1,20 @@
+def open_run_dialog_and_type(command_type):
+    #it will simultaneously click win+r
+    pyautogui.hotkey('win', 'r')
+    time.sleep(2)  # Wait for the Run dialog to open
+    pyautogui.typewrite(command_type)
+    pyautogui.press('Enter')  
+if __name__ == "__main__":
+    speak("Sir opened the run dialoge and What would you like to run? or what is the command to enter?")
+    while True:
+        command = listen()
+        if "open run" in command or "run" in command:
+            speak("What command would you like to run?")
+            command_type = listen()  
+
+            if command_type:
+                open_run_dialog_and_type(command_type)
+                speak(f"opening Running dialog and entering command {command_type}.")
+        elif "exit" in command: #it will exit from the present state and also close the program 
+            speak("Goodbye!")
+            break()
