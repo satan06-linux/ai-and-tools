@@ -1,30 +1,33 @@
 import psutil ## pip install psutil ##
-import time  ## pip install time ##
-## (OR) ALTERNATIVE FOR TIME IS from datetime import time ##
+import time ## pip install time ##
 
-def memory_utilization_checker(interval=2):    ## exceptional def memory_utilization_checker(): as the code for it ##
-    while True:
-        # Get the memory usage of the current process
-        process = psutil.Process()
-        mem_info = process.memory_info()
-        
-        # Get the virtual memory usage of the system
-        virtual_memory = psutil.virtual_memory()
-        
-        print(f"--- Memory Utilization ---")
-        print(f"Process Memory Usage: {mem_info.rss / (1024 ** 2):.2f} MB")  # Resident Set Size
-        print(f"Virtual Memory Total: {virtual_memory.total / (1024 ** 2):.2f} MB")
-        print(f"Virtual Memory Used: {virtual_memory.used / (1024 ** 2):.2f} MB")
-        print(f"Virtual Memory Available: {virtual_memory.available / (1024 ** 2):.2f} MB")
-        print(f"Memory Usage Percentage: {virtual_memory.percent}%")
-        print("--------------------------")
-        
-        time.sleep(interval)  # Wait for the specified interval before checking again
-        # or you can write it as time.sleep(2) #
+def memory_utilization_checker(interval=2, max_checks=None):
+    check_count = 0
+    try:
+        while True:
+            process = psutil.Process()
+            mem_info = process.memory_info()
+            virtual_memory = psutil.virtual_memory()
+
+            print(f"--- Memory Utilization ---")
+            print(f"Process Memory Usage: {mem_info.rss / (1024 ** 2):.2f} MB (RSS)")
+            print(f"Virtual Memory Total: {virtual_memory.total / (1024 ** 3):.2f} GB")
+            print(f"Virtual Memory Used: {virtual_memory.used / (1024 ** 3):.2f} GB")
+            print(f"Virtual Memory Available: {virtual_memory.available / (1024 ** 3):.2f} GB")
+            print(f"Memory Usage Percentage: {virtual_memory.percent}%")
+            print("--------------------------\n")
+
+            check_count += 1
+            if max_checks and check_count >= max_checks:
+                print("Reached maximum number of checks. Exiting.")
+                break
+
+            time.sleep(interval)
+    except KeyboardInterrupt:
+        print("\nMemory utilization checker stopped by user.")
+    except Exception as e:
+        print(f"\nAn error occurred: {e}")
+
 if __name__ == "__main__":
     print("Starting memory utilization checker. Press Ctrl+C to stop.")
-    try:
-        memory_utilization_checker(interval=5)  # Check every 5 seconds
-    except KeyboardInterrupt:
-        print("\nMemory utilization checker stopped.")
-
+    memory_utilization_checker(interval=5, max_checks=None)  # Set max_checks to an int to limit runs
