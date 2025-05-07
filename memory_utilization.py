@@ -1,7 +1,8 @@
-import psutil
-import time
+import psutil ## pip install psutil ##
+import time  ## pip install time ##
+## (OR) ALTERNATIVE FOR TIME IS from datetime import time ##
 
-def memory_utilization_checker(interval=5):
+def memory_utilization_checker(interval=2):    ## exceptional def memory_utilization_checker(): as the code for it ##
     while True:
         # Get the memory usage of the current process
         process = psutil.Process()
@@ -19,7 +20,7 @@ def memory_utilization_checker(interval=5):
         print("--------------------------")
         
         time.sleep(interval)  # Wait for the specified interval before checking again
-
+        # or you can write it as time.sleep(2) #
 if __name__ == "__main__":
     print("Starting memory utilization checker. Press Ctrl+C to stop.")
     try:
