@@ -490,6 +490,14 @@ def main():
                 take_screenshot(name)
             else:
                 speak("Screenshot cancelled")
+                
+                """ else you can use this code 
+                elif "take a screenshot" in query:
+                speak("Okay sir")
+                img = pyautogui.screenshot()
+                name = input("Enter a name")
+                img.save(f"{name}")
+                """
 
         elif "generate password" in query:
             password = generate_password()
