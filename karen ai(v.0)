@@ -66,7 +66,7 @@ if __name__ == "__main__":
         #logic building for tasks
 
         if "open notepad" in query:
-            npath = "C:\\WINDOWS\\system32\\notepad.exe"
+            npath = "#notepad file path that is located #"
             os.startfile(npath)
 
         elif "open command prompt" in query:
@@ -107,7 +107,7 @@ if __name__ == "__main__":
             webbrowser.open("www.google.com")
 
         elif "send message" in query:
-            kit.sendwhatmsg("+916300982019","this is testing protocol",2,24)
+            kit.sendwhatmsg("#your phonenumberwithcountrycode#","this is testing protocol",2,24)
 
         elif "play songs on youtube" in query:
             kit.playonyt("see you again")
