@@ -1,10 +1,19 @@
 import smtplib
+import re
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email import encoders
+from getpass import getpass
+import os
 
-def send_email(sender_email, sender_password, recipient_email, subject, body):
+def is_valid_email(email):
+    # Simple regex for email validation
+    pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+    return re.match(pattern, email) is not None
+
+def send_email(sender_email, sender_password, recipient_email, subject, body, smtp_server, smtp_port, attachments=None):
     try:
-        # Create a multipart message
         msg = MIMEMultipart()
         msg['From'] = sender_email
         msg['To'] = recipient_email
@@ -12,34 +21,81 @@ def send_email(sender_email, sender_password, recipient_email, subject, body):
 
         msg.attach(MIMEText(body, 'plain'))
 
-        with smtplib.SMTP('smtp.gmail.com', 587) as server:
-            server.starttls() 
-            server.login(sender_email, sender_password)  # Log in to your email account
-            server.send_message(msg)  # Send the email
+        # Attach files if any
+        if attachments:
+            for filepath in attachments:
+                if not os.path.isfile(filepath):
+                    print(f"Attachment not found: {filepath}")
+                    continue
+                part = MIMEBase('application', 'octet-stream')
+                with open(filepath, 'rb') as file:
+                    part.set_payload(file.read())
+                encoders.encode_base64(part)
+                part.add_header('Content-Disposition', f'attachment; filename="{os.path.basename(filepath)}"')
+                msg.attach(part)
+
+        with smtplib.SMTP(smtp_server, smtp_port) as server:
+            server.starttls()
+            server.login(sender_email, sender_password)
+            server.send_message(msg)
 
         print("Email sent successfully!")
+    except smtplib.SMTPAuthenticationError:
+        print("Authentication failed: Check your email and password.")
+    except smtplib.SMTPConnectError:
+        print("Failed to connect to the SMTP server.")
     except Exception as e:
         print(f"An error occurred: {e}")
 
+def get_multiline_input(prompt):
+    print(prompt + " (End input with a single '.' on a line)")
+    lines = []
+    while True:
+        line = input()
+        if line.strip() == '.':
+            break
+        lines.append(line)
+    return '\n'.join(lines)
+
 if __name__ == "__main__":
     print("Welcome to Jarvis! Type 'send email' to send an email or 'exit' to quit.")
-    
+
     while True:
         command = input("You: ").strip().lower()
-        
+
         if command == "send email":
-            sender_email = input("Enter your email: ")
-            sender_password = input("Enter your password: ")
-            recipient_email = input("Enter recipient's email: ")
-            subject = input("Enter the subject: ")
-            body = input("Enter the email body: ")
-            
-            send_email(sender_email, sender_password, recipient_email, subject, body)
-        
+            sender_email = input("Enter your email: ").strip()
+            if not is_valid_email(sender_email):
+                print("Invalid sender email format.")
+                continue
+
+            sender_password = getpass("Enter your password (input hidden): ")
+
+            recipient_email = input("Enter recipient's email: ").strip()
+            if not is_valid_email(recipient_email):
+                print("Invalid recipient email format.")
+                continue
+
+            subject = input("Enter the subject: ").strip()
+
+            body = get_multiline_input("Enter the email body")
+
+            smtp_server = input("Enter SMTP server (default: smtp.gmail.com): ").strip() or "smtp.gmail.com"
+            smtp_port_input = input("Enter SMTP port (default: 587): ").strip()
+            smtp_port = int(smtp_port_input) if smtp_port_input.isdigit() else 587
+
+            attachments = []
+            attach_more = input("Do you want to add attachments? (yes/no): ").strip().lower()
+            while attach_more == 'yes':
+                filepath = input("Enter the full path to the attachment file: ").strip()
+                attachments.append(filepath)
+                attach_more = input("Add another attachment? (yes/no): ").strip().lower()
+
+            send_email(sender_email, sender_password, recipient_email, subject, body, smtp_server, smtp_port, attachments)
+
         elif command == "exit":
             print("Exiting Jarvis. Goodbye!")
             break
-        
+
         else:
             print("Unknown command. Please try again.")
-
